@@ -15,7 +15,7 @@ export function parse(args) {
     for (let key in optionList) {
       if (optionList[key].includes(el)) {
         if (key in options) {
-          error.duplicate();
+          error.duplicate(key);
         }
         options[key] = args[index + 1];
       }

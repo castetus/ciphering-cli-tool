@@ -4,22 +4,29 @@ export function validator(config) {
   }
 
   const ciphers = ['C', 'A', 'R'];
+  const flags = ['1', '0'];
+
+  let result;
 
   const configArr = config.split('-');
 
   configArr.forEach((el) => {
     if (!ciphers.includes(el.charAt(0))) {
-      return false;
+      result = 'invalid';
     }
     if (el.charAt(0) === 'A' && el.length !== 1) {
-      return false;
+      result = 'invalid';
     } else if (el.length !== 2 && el.charAt(0) !== 'A') {
-      return false;
+      result = 'invalid';
     }
-    if (el.charAt(0) !== 'A' && (el.charAt(1) !== '1' || el.charAt(1) !== '0')) {
-      return false;
+    if (el.charAt(0) !== 'A' && !flags.includes(el.charAt(1))) {
+      result = 'invalid';
     }
   });
 
-  return configArr;
+  if (result !== 'invalid') {
+    result = configArr;
+  }
+
+  return result;
 }

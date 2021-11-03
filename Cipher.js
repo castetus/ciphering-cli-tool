@@ -1,4 +1,4 @@
-import { alphabetLength, lowerCase, upperCase } from './constants.js';
+import { alphabetLength, lowerCase, upperCase, shifts } from './constants.js';
 
 export default class Cipher {
   range = {};
@@ -11,9 +11,9 @@ export default class Cipher {
   transform(string) {
     const result = string.split('').map((char) => {
       const charCode = char.charCodeAt(0);
-      if (charCode === 13 || charCode === 10) {
-        return '';
-      }
+      // if (charCode === 13 || charCode === 10) {
+      //   return String.fromCharCode(charCode);
+      // }
       if (this.between(charCode, lowerCase)) {
         this.range = Object.assign({}, lowerCase);
       } else if (this.between(charCode, upperCase)) {
@@ -21,32 +21,35 @@ export default class Cipher {
       } else {
         return char;
       }
-      let newCharCode = charCode;
-
-      this.config.forEach((converting) => {
-        switch (converting.charAt(0)) {
-          case 'C':
-            newCharCode = this.caesar(newCharCode, converting, 1);
-            break;
-          case 'A':
-            newCharCode = this.atbash(newCharCode);
-            break;
-          case 'R':
-            newCharCode = this.caesar(newCharCode, converting, 8);
-            break;
-          default:
-            newCharCode;
-            break;
-        }
-      });
+      const newCharCode = this.setCipherConditions(charCode);
       return String.fromCharCode(newCharCode);
     }).join('');
     return result;
   }
 
+  setCipherConditions(charCode) {
+    let newCharCode = charCode;
+    this.config.forEach((converting) => {
+      switch (converting.charAt(0)) {
+        case 'C':
+          newCharCode = this.caesar(newCharCode, converting, shifts.caesar);
+          break;
+        case 'A':
+          newCharCode = this.atbash(newCharCode);
+          break;
+        case 'R':
+          newCharCode = this.caesar(newCharCode, converting, shifts.rot);
+          break;
+        default:
+          newCharCode;
+          break;
+      }
+    });
+    return newCharCode;
+  }
 
-  caesar(charCode, config, shift) {
-    config.charAt(1) === '0' ? shift = -shift : shift;
+  caesar(charCode, converting, shift) {
+    converting.charAt(1) === '0' ? shift = -shift : shift;
     let newCharCode = charCode + shift;
     if (newCharCode > this.range.max) {
       newCharCode = newCharCode - alphabetLength;

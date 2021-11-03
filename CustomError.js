@@ -1,15 +1,22 @@
 export default class CustomError {
-  constructor() {
-    // console.log(process);
-  }
 
-  duplicate() {
-    console.error('duplicate');
+  duplicate(key) {
+    process.stderr.write(`Duplicate argument ${key}`);
     process.exit('1');
   }
 
-  missing(option = null) {
-    console.error(option || 'missing');
+  missing() {
+    process.stderr.write(`Missing argument 'config'`);
+    process.exit('1');
+  }
+
+  incorrect() {
+    process.stderr.write('Config is incorrect');
+    process.exit('1');
+  }
+
+  notAccess(file) {
+    process.stderr.write(`Cannot access to file ${file}`);
     process.exit('1');
   }
 }

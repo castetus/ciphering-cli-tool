@@ -9,3 +9,8 @@ export const upperCase = {
   min: 65,
   max: 90,
 };
+
+export const shifts = {
+  caesar: 1,
+  rot: 8,
+};

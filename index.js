@@ -13,24 +13,28 @@ const error = new CustomError();
 const options = parse(process.argv.slice(2));
 const config = validator(options.config);
 
+if (!config) {
+  error.missing();
+}
+
+if (config === 'invalid') {
+  error.incorrect();
+}
+
 const readerStream = options.input ? fs.createReadStream(options.input) : process.stdin;
 const writerStream = options.output ? fs.createWriteStream(options.output, {flags: 'a'}) : process.stdout;
 const TransformStream = new Transform();
 
-readerStream.on('error', (err) => error.missing(`test`));
-writerStream.on('error', (err) => error.missing(`test: ${err}`));
+readerStream.on('error', (err) => error.notAccess(options.input));
+writerStream.on('error', (err) => error.notAccess(options.output));
 
 readerStream.setEncoding('UTF8');
 
-const enigma = new Cipher(config);
+const cipherMachine = new Cipher(config);
 
 TransformStream._transform = (chunk, encoding, callback) => {
-  TransformStream.push(enigma.transform(chunk.toString()));
+  TransformStream.push(`${cipherMachine.transform(chunk.toString())}\n`);
   callback();
 };
-
-if (!config) {
-  error.missing();
-}
 
 readerStream.pipe(TransformStream).pipe(writerStream);
