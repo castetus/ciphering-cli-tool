@@ -21,5 +21,5 @@ export function validator(config) {
     }
   });
 
-  return true;
+  return configArr;
 }
