@@ -11,9 +11,6 @@ export default class Cipher {
   transform(string) {
     const result = string.split('').map((char) => {
       const charCode = char.charCodeAt(0);
-      // if (charCode === 13 || charCode === 10) {
-      //   return String.fromCharCode(charCode);
-      // }
       if (this.between(charCode, lowerCase)) {
         this.range = Object.assign({}, lowerCase);
       } else if (this.between(charCode, upperCase)) {

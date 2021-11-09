@@ -1,7 +1,7 @@
 'use strict';
 
 import * as fs from 'fs';
-import { Transform } from 'stream';
+import { Transform, Readable, Writable } from 'stream';
 
 const readerStream = fs.createReadStream('input.txt');
 const writerStream = fs.createWriteStream('output.txt', {flags: 'a'});
