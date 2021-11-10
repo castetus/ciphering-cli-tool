@@ -21,7 +21,7 @@ if (config === 'invalid') {
 
 const readerStream = options.input ? fs.createReadStream(options.input) : process.stdin;
 const writerStream = options.output ? fs.createWriteStream(options.output, {flags: 'a'}) : process.stdout;
-const TransformStream = new Transform();
+// const TransformStream = new Transform();
 
 readerStream.on('error', () => error.notAccess(options.input));
 writerStream.on('error', () => error.notAccess(options.output));
@@ -32,7 +32,7 @@ const transformStreams = config.map((item) => {
   const cipher = new Cipher(item);
   const transformStream = new Transform();
   transformStream._transform = (chunk, encoding, callback) => {
-    TransformStream.push(`${cipher.transform(chunk.toString())}\n`);
+    transformStream.push(`${cipher.transform(chunk.toString())}\n`);
     callback();
   };
   return transformStream;
@@ -40,7 +40,7 @@ const transformStreams = config.map((item) => {
 
 pipeline(
   readerStream,
-   ...transformStreams,
+  ...transformStreams,
   writerStream,
   (err) => {
     if (err) {
