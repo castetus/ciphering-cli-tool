@@ -25,22 +25,20 @@ export default class Cipher {
 
   setCipherConditions(charCode) {
     let newCharCode = charCode;
-    this.config.forEach((converting) => {
-      switch (converting.charAt(0)) {
+      switch (this.config.charAt(0)) {
         case 'C':
-          newCharCode = this.caesar(newCharCode, converting, shifts.caesar);
+          newCharCode = this.caesar(newCharCode, this.config, shifts.caesar);
           break;
         case 'A':
           newCharCode = this.atbash(newCharCode);
           break;
         case 'R':
-          newCharCode = this.caesar(newCharCode, converting, shifts.rot);
+          newCharCode = this.caesar(newCharCode, this.config, shifts.rot);
           break;
         default:
           newCharCode;
           break;
       }
-    });
     return newCharCode;
   }
 

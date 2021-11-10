@@ -29,5 +29,8 @@
   "type": "module",
   "bin": {
     "my_caesar_cli": "./index.js"
+  },
+  "engines": {
+    "node": ">=14.0.0"
   }
 }

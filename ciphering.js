@@ -5,7 +5,7 @@ import { validator } from './validator.js';
 import CustomError from './CustomError.js';
 import Cipher from './Cipher.js';
 import * as fs from 'fs';
-import { Transform } from 'stream';
+import { pipeline, Transform } from 'stream';
 
 const error = new CustomError();
 const options = parse(process.argv.slice(2));
@@ -28,11 +28,23 @@ writerStream.on('error', () => error.notAccess(options.output));
 
 readerStream.setEncoding('UTF8');
 
-const cipherMachine = new Cipher(config);
+const transformStreams = config.map((item) => {
+  const cipher = new Cipher(item);
+  const transformStream = new Transform();
+  transformStream._transform = (chunk, encoding, callback) => {
+    TransformStream.push(`${cipher.transform(chunk.toString())}\n`);
+    callback();
+  };
+  return transformStream;
+});
 
-TransformStream._transform = (chunk, encoding, callback) => {
-  TransformStream.push(`${cipherMachine.transform(chunk.toString())}\n`);
-  callback();
-};
-
-readerStream.pipe(TransformStream).pipe(writerStream);
+pipeline(
+  readerStream,
+   ...transformStreams,
+  writerStream,
+  (err) => {
+    if (err) {
+      console.error('Pipeline failed.', err);
+    }
+  }
+);
