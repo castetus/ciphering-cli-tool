@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 'use strict';
 
 import { parse } from './parse.js';
@@ -25,8 +23,8 @@ const readerStream = options.input ? fs.createReadStream(options.input) : proces
 const writerStream = options.output ? fs.createWriteStream(options.output, {flags: 'a'}) : process.stdout;
 const TransformStream = new Transform();
 
-readerStream.on('error', (err) => error.notAccess(options.input));
-writerStream.on('error', (err) => error.notAccess(options.output));
+readerStream.on('error', () => error.notAccess(options.input));
+writerStream.on('error', () => error.notAccess(options.output));
 
 readerStream.setEncoding('UTF8');
 

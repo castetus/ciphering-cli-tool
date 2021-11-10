@@ -1,11 +1,10 @@
 import { alphabetLength, lowerCase, upperCase, shifts } from './constants.js';
 
 export default class Cipher {
-  range = {};
-  config = [];
 
   constructor(config) {
     this.config = config;
+    this.range = {};
   }
 
   transform(string) {
