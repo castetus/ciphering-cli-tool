@@ -1,4 +1,3 @@
-/* eslint-disable no-process-exit */
 export default class CustomError {
 
   duplicate(key) {
