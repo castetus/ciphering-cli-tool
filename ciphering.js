@@ -19,12 +19,31 @@ if (config === 'invalid') {
   error.incorrect();
 }
 
-const readerStream = options.input ? fs.createReadStream(options.input) : process.stdin;
-const writerStream = options.output ? fs.createWriteStream(options.output, {flags: 'a'}) : process.stdout;
-// const TransformStream = new Transform();
+function checkFileAccess(path) {
+  try {
+    if (fs.statSync(path)) {
+      return true;
+    }
+  } catch(err) {
+    error.notAccess(path)
+  }
+}
 
-readerStream.on('error', () => error.notAccess(options.input));
-writerStream.on('error', () => error.notAccess(options.output));
+let readerStream, writerStream;
+
+if (options.input) {
+  checkFileAccess(options.input);
+  readerStream = fs.createReadStream(options.input);
+} else {
+  readerStream = process.stdin;
+}
+
+if (options.output) {
+  checkFileAccess(options.output);
+  writerStream = fs.createWriteStream(options.output, {flags: 'a'});
+} else {
+  writerStream = process.stdout;
+}
 
 readerStream.setEncoding('UTF8');
 
