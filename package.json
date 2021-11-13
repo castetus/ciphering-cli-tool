@@ -1,0 +1,36 @@
+{
+  "name": "my_caesar_cli",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "npx eslint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/castetus/ciphering-cli-tool.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/castetus/ciphering-cli-tool/issues"
+  },
+  "homepage": "https://github.com/castetus/ciphering-cli-tool#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.1.1",
+    "nodemon": "^2.0.14"
+  },
+  "type": "module",
+  "bin": {
+    "my_caesar_cli": "./index.js"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
