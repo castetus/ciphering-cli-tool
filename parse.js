@@ -1,15 +1,10 @@
 import CustomError from "./CustomError.js";
+import { optionList } from "./constants.js";
 
 export function parse(args) {
   const options = {};
 
   const error = new CustomError();
-
-  const optionList = {
-    config: ['-c', '--config'],
-    input: ['-i', '--input'],
-    output: ['-o', '--output'],
-  };
 
   args.forEach((el, index) => {
     for (let key in optionList) {

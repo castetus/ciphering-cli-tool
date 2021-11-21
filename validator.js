@@ -1,4 +1,4 @@
-import { ciphers, flags } from './constants';
+import { ciphers, flags } from './constants.js';
 
 export function validator(config) {
   if (!config) {

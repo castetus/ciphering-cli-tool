@@ -8,6 +8,7 @@ import * as fs from 'fs';
 import { pipeline, Transform } from 'stream';
 
 const error = new CustomError();
+console.log(process.argv.slice(2))
 const options = parse(process.argv.slice(2));
 const config = validator(options.config);
 

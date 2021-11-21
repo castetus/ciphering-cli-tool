@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1637488531399" clover="3.2.0">
+  <project timestamp="1637488531399" name="All files">
+    <metrics statements="21" coveredstatements="21" conditionals="18" coveredconditionals="18" methods="2" coveredmethods="2" elements="41" coveredelements="41" complexity="0" loc="21" ncloc="21" packages="1" files="2" classes="2"/>
+    <file name="constants.js" path="/home/hvedrung/projects/ciphering-cli-tool/constants.js">
+      <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <line num="1" count="1" type="stmt"/>
+      <line num="3" count="1" type="stmt"/>
+      <line num="8" count="1" type="stmt"/>
+      <line num="13" count="1" type="stmt"/>
+      <line num="18" count="1" type="stmt"/>
+      <line num="19" count="1" type="stmt"/>
+    </file>
+    <file name="validator.js" path="/home/hvedrung/projects/ciphering-cli-tool/validator.js">
+      <metrics statements="15" coveredstatements="15" conditionals="18" coveredconditionals="18" methods="2" coveredmethods="2"/>
+      <line num="4" count="6" type="cond" truecount="2" falsecount="0"/>
+      <line num="5" count="1" type="stmt"/>
+      <line num="10" count="5" type="stmt"/>
+      <line num="12" count="5" type="stmt"/>
+      <line num="13" count="12" type="cond" truecount="2" falsecount="0"/>
+      <line num="14" count="1" type="stmt"/>
+      <line num="16" count="12" type="cond" truecount="4" falsecount="0"/>
+      <line num="17" count="1" type="stmt"/>
+      <line num="18" count="11" type="cond" truecount="4" falsecount="0"/>
+      <line num="19" count="1" type="stmt"/>
+      <line num="21" count="12" type="cond" truecount="4" falsecount="0"/>
+      <line num="22" count="2" type="stmt"/>
+      <line num="26" count="5" type="cond" truecount="2" falsecount="0"/>
+      <line num="27" count="1" type="stmt"/>
+      <line num="30" count="5" type="stmt"/>
+    </file>
+  </project>
+</coverage>
