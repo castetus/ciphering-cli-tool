@@ -14,3 +14,6 @@ export const shifts = {
   caesar: 1,
   rot: 8,
 };
+
+export const ciphers = ['C', 'A', 'R'];
+export const flags = ['1', '0'];
