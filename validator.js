@@ -1,10 +1,9 @@
+import { ciphers, flags } from './constants.js';
+
 export function validator(config) {
   if (!config) {
     return false;
   }
-
-  const ciphers = ['C', 'A', 'R'];
-  const flags = ['1', '0'];
 
   let result;
 
